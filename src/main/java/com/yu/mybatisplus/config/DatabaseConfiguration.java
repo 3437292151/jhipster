@@ -1,5 +1,6 @@
 package com.yu.mybatisplus.config;
 
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import io.github.jhipster.config.JHipsterConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,4 +22,8 @@ public class DatabaseConfiguration {
     private final Logger log = LoggerFactory.getLogger(DatabaseConfiguration.class);
 
 
+    @Bean
+    public PaginationInterceptor paginationInterceptor() {
+        return new PaginationInterceptor();
+    }
 }

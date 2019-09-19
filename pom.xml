@@ -89,6 +89,7 @@
         <sonar.tests>${project.basedir}/src/test/</sonar.tests>
 
         <!-- jhipster-needle-maven-property -->
+        <Fine.version>8.0</Fine.version>
     </properties>
 
     <dependencyManagement>
@@ -105,6 +106,7 @@
     </dependencyManagement>
 
     <dependencies>
+
         <dependency>
             <groupId>io.github.jhipster</groupId>
             <artifactId>jhipster-framework</artifactId>
@@ -362,11 +364,75 @@
             <artifactId>spring-security-data</artifactId>
         </dependency>
         <!-- jhipster-needle-maven-add-dependency -->
+
+        <!-- mybatis-plus -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.1.2</version>
+        </dependency>
+
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.22</version>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- FineReport -->
+        <dependency>
+            <groupId>com.fr</groupId>
+            <artifactId>fr-core</artifactId>
+            <version>${Fine.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fr</groupId>
+            <artifactId>fr-report</artifactId>
+            <version>${Fine.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fr</groupId>
+            <artifactId>fr-third</artifactId>
+            <version>${Fine.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fr</groupId>
+            <artifactId>fr-performance</artifactId>
+            <version>${Fine.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fr</groupId>
+            <artifactId>fr-platform</artifactId>
+            <version>${Fine.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fr</groupId>
+            <artifactId>fr-chart</artifactId>
+            <version>${Fine.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
         <defaultGoal>spring-boot:run</defaultGoal>
         <plugins>
+            <!-- mybatis plus generator -->
+            <plugin>
+                <groupId>com.yu</groupId>
+                <artifactId>springboot-mybatisplus-plugins</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <configuration>
+                    <generatorConfigFile>${project.basedir}/src/main/resources/generatorConfig.properties</generatorConfigFile>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>mybatis</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -384,7 +450,11 @@
                             <artifactId>hibernate-jpamodelgen</artifactId>
                             <version>${hibernate.version}</version>
                         </path>
-
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.16.22</version>
+                        </path>
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
